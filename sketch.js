@@ -15,6 +15,8 @@ var angerScreen = 0;
 var bargainScreen = 0;
 var depressionScreen = 0;
 var acceptanceScreen = 0;
+var statementScreen = 0;
+var infoScreen = 0;
 
 function preload() {
   mask = loadImage("mask.png");
@@ -124,6 +126,42 @@ function setup() {
     acceptanceScreen = 1;
     closeStage();
   };
+  
+  artStatement = new Clickable();
+  artStatement.locate(390, 440);
+  artStatement.resize(100, 50);
+  artStatement.text = "Artist Statement";
+  artStatement.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  artStatement.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  artStatement.onPress = function () {
+    statementScreen = 1;
+    artistStatement();
+  };
+  
+  info = new Clickable();
+  info.locate(10, 440);
+  info.resize(100, 50);
+  info.text = "More Information";
+  info.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  info.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  info.onPress = function () {
+    infoScreen = 1;
+    ending();
+  };
 }
 
 function draw() {
@@ -131,11 +169,20 @@ function draw() {
     case "title":
       titleScreen();
       break;
+    case "rules":  
+      instructions();
+      break;
     case "main":
       mainStage();
       break;
     case "close":
       closeStage();
+      break;
+    case "artSta":  
+      artistStatement();
+      break;
+    case "end":
+      ending();
       break;
   }
 }
@@ -148,8 +195,13 @@ function keyPressed() {
     angerScreen = 0;
     bargainScreen = 0;
     depressionScreen = 0;
-    acceptanceScreen = 0;
+    acceptanceScreen = 0; 
+    statementScreen = 0;
+    infoScreen = 0;
   }
+  else if (key === "n" || key === "N"){
+    mode = "rules";
+  }    
 }
 
 function titleScreen() {
@@ -172,6 +224,18 @@ function titleScreen() {
   text('Press "s" to begin', width * 0.5, height * 0.66);
 }
 
+//instructions page
+function instructions() {
+  background(255, 229, 168);
+  strokeWeight(5);
+  stroke(255);
+  fill(0);
+  textSize(35);
+  textAlign(CENTER);
+  textFont(mdr);
+  text("Instructions", width * 0.5, height * 0.33);
+}
+
 //main game screen
 function mainStage() {
   background(255, 229, 168);
@@ -189,6 +253,8 @@ function mainStage() {
   bargain.draw();
   depression.draw();
   acceptance.draw();
+  artStatement.draw();
+  info.draw();
 }
 
 //close up interaction with selected character
@@ -297,6 +363,36 @@ function closeStage() {
     textSize(20);
     text("Acceptance", width * 0.25, height * 0.73);
   }
+  
+  if (artStatement.onPress) {
+    mode = "artSta";
+  }
+  
+  if (artStatement.onPress) {
+    mode = "artSta";
+  }
+}
+
+function artistStatement() {
+  background(255, 229, 168);
+  strokeWeight(5);
+  stroke(255);
+  fill(0);
+  textSize(35);
+  textAlign(CENTER);
+  textFont(mdr);
+  text("Artist Statement", width * 0.5, height * 0.33);
+}
+
+function ending() {
+  background(255, 229, 168);
+  strokeWeight(5);
+  stroke(255);
+  fill(0);
+  textSize(35);
+  textAlign(CENTER);
+  textFont(mdr);
+  text("Info page", width * 0.5, height * 0.33);
 }
 
 function textBox() {

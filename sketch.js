@@ -9,12 +9,15 @@ var anger;
 var bargain;
 var depression;
 var acceptance;
+var artStatement;
+var info;
 
 var denialScreen = 0;
 var angerScreen = 0;
 var bargainScreen = 0;
 var depressionScreen = 0;
 var acceptanceScreen = 0;
+
 var statementScreen = 0;
 var infoScreen = 0;
 
@@ -31,8 +34,20 @@ var btwoScreen = 0;
 var dponeScreen = 0;
 var dptwoScreen = 0;
 
-var aoneScreen = 0;
-var atwoScreen = 0;
+var aconeScreen = 0;
+var actwoScreen = 0;
+
+//choices 
+var dchoice1;
+var dchoice2;
+var anchoice1;
+var anchoice2;
+var bchoice1;
+var bchoice2;
+var dpchoice1;
+var dpchoice2;
+var acchoice1;
+var acchoice2;
 
 function preload() {
   mask = loadImage("mask.png");
@@ -46,192 +61,15 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 500);
-
-  dchoice1 = new Clickable();
-  dchoice1.locate(width * 0.1, height * 0.25);
-  dchoice1.resize(400, 50);
-  dchoice1.text = "Choice 1";
-  dchoice1.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  dchoice1.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  dchoice1.onPress = function () {
-    doneScreen = 1;
-    dchoiceone();
-  };
-
-  dchoice2 = new Clickable();
-  dchoice2.locate(width * 0.1, height * 0.4);
-  dchoice2.resize(400, 50);
-  dchoice2.text = "Choice 2";
-  dchoice2.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  dchoice2.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  dchoice2.onPress = function () {
-    dtwoScreen = 1;
-    dchoicetwo();
-  };
-
-  anchoice1 = new Clickable();
-  anchoice1.locate(width * 0.1, height * 0.25);
-  anchoice1.resize(400, 50);
-  anchoice1.text = "Choice 1";
-  anchoice1.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  anchoice1.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  anchoice1.onPress = function () {
-    anoneScreen = 1;
-    anchoiceone();
-  };
-
-  anchoice2 = new Clickable();
-  anchoice2.locate(width * 0.1, height * 0.4);
-  anchoice2.resize(400, 50);
-  anchoice2.text = "Choice 2";
-  anchoice2.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  anchoice2.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  anchoice2.onPress = function () {
-    antwoScreen = 1;
-    anchoicetwo();
-  };
-
-  bchoice1 = new Clickable();
-  bchoice1.locate(width * 0.1, height * 0.25);
-  bchoice1.resize(400, 50);
-  bchoice1.text = "Choice 1";
-  bchoice1.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  bchoice1.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  bchoice1.onPress = function () {
-    boneScreen = 1;
-    bchoiceone();
-  };
-
-  bchoice2 = new Clickable();
-  bchoice2.locate(width * 0.1, height * 0.4);
-  bchoice2.resize(400, 50);
-  bchoice2.text = "Choice 2";
-  bchoice2.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  bchoice2.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  bchoice2.onPress = function () {
-    btwoScreen = 1;
-    bchoicetwo();
-  };
-
-  dpchoice1 = new Clickable();
-  dpchoice1.locate(width * 0.1, height * 0.25);
-  dpchoice1.resize(400, 50);
-  dpchoice1.text = "Choice 1";
-  dpchoice1.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  dpchoice1.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  dpchoice1.onPress = function () {
-    dponeScreen = 1;
-    dpchoiceone();
-  };
-
-  dpchoice2 = new Clickable();
-  dpchoice2.locate(width * 0.1, height * 0.4);
-  dpchoice2.resize(400, 50);
-  dpchoice2.text = "Choice 2";
-  dpchoice2.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  dpchoice2.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  dpchoice2.onPress = function () {
-    dptwoScreen = 1;
-    dpchoicetwo();
-  };
-
-  achoice1 = new Clickable();
-  achoice1.locate(width * 0.1, height * 0.25);
-  achoice1.resize(400, 50);
-  achoice1.text = "Choice 1";
-  achoice1.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  achoice1.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  achoice1.onPress = function () {
-    aoneScreen = 1;
-    achoiceone();
-  };
-
-  achoice2 = new Clickable();
-  achoice2.locate(width * 0.1, height * 0.4);
-  achoice2.resize(400, 50);
-  achoice2.text = "Choice 2";
-  achoice2.onHover = function () {
-    this.color = "#FFE475";
-    this.noTint = false;
-    this.tint = "#FF0000";
-  };
-  achoice2.onOutside = function () {
-    this.color = "#FFFFFF";
-    this.noTint = true;
-  };
-  achoice2.onPress = function () {
-    atwoScreen = 1;
-    achoicetwo();
-  };
+  var cnv = createCanvas(800, 800);
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
 
   //Character One
   denial = new Clickable();
-  denial.locate(90, 100);
-  denial.resize(100, 100);
+  denial.locate(width * 0.03, height * 0.4);
+  denial.resize(140, 140);
   denial.text = "D e n i a l";
   denial.onHover = function () {
     this.color = "#FFE475";
@@ -249,8 +87,8 @@ function setup() {
 
   //Character Two
   anger = new Clickable();
-  anger.locate(310, 100);
-  anger.resize(100, 100);
+  anger.locate(width * 0.22, height * 0.4);
+  anger.resize(140, 140);
   anger.text = "A n g e r";
   anger.onHover = function () {
     this.color = "#FFE475";
@@ -268,8 +106,8 @@ function setup() {
 
   //Character Three
   bargain = new Clickable();
-  bargain.locate(30, 250);
-  bargain.resize(100, 100);
+  bargain.locate(width * 0.41, height * 0.4);
+  bargain.resize(140, 140);
   bargain.text = "B a r g a i n";
   bargain.onHover = function () {
     this.color = "#FFE475";
@@ -287,8 +125,8 @@ function setup() {
 
   //Character Four
   depression = new Clickable();
-  depression.locate(370, 250);
-  depression.resize(100, 100);
+  depression.locate(width * 0.6, height * 0.4);
+  depression.resize(140, 140);
   depression.text = "D e p r e s s i o n";
   depression.onHover = function () {
     this.color = "#FFE475";
@@ -306,8 +144,8 @@ function setup() {
 
   //Character Five
   acceptance = new Clickable();
-  acceptance.locate(200, 370);
-  acceptance.resize(100, 100);
+  acceptance.locate(width * 0.79, height * 0.4);
+  acceptance.resize(140, 140);
   acceptance.text = "A c c e p t a n c e";
   acceptance.onHover = function () {
     this.color = "#FFE475";
@@ -324,7 +162,7 @@ function setup() {
   };
 
   artStatement = new Clickable();
-  artStatement.locate(390, 440);
+  artStatement.locate(width * 0.85, height * 0.91);
   artStatement.resize(100, 50);
   artStatement.text = "Artist Statement";
   artStatement.onHover = function () {
@@ -342,7 +180,7 @@ function setup() {
   };
 
   info = new Clickable();
-  info.locate(10, 440);
+  info.locate(width * 0.02, height * 0.91);
   info.resize(100, 50);
   info.text = "More Information";
   info.onHover = function () {
@@ -357,6 +195,187 @@ function setup() {
   info.onPress = function () {
     infoScreen = 1;
     ending();
+  };
+
+  //choices for each stage
+  dchoice1 = new Clickable();
+  dchoice1.locate(width * 0.25, height * 0.25);
+  dchoice1.resize(400, 50);
+  dchoice1.text = "Choice 1";
+  dchoice1.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  dchoice1.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  dchoice1.onPress = function () {
+    doneScreen = 1;
+    dchoiceone();
+  };
+
+  dchoice2 = new Clickable();
+  dchoice2.locate(width * 0.25, height * 0.4);
+  dchoice2.resize(400, 50);
+  dchoice2.text = "Choice 2";
+  dchoice2.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  dchoice2.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  dchoice2.onPress = function () {
+    dtwoScreen = 1;
+    dchoicetwo();
+  };
+
+  anchoice1 = new Clickable();
+  anchoice1.locate(width * 0.25, height * 0.25);
+  anchoice1.resize(400, 50);
+  anchoice1.text = "Choice 1";
+  anchoice1.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  anchoice1.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  anchoice1.onPress = function () {
+    anoneScreen = 1;
+    anchoiceone();
+  };
+
+  anchoice2 = new Clickable();
+  anchoice2.locate(width * 0.25, height * 0.4);
+  anchoice2.resize(400, 50);
+  anchoice2.text = "Choice 2";
+  anchoice2.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  anchoice2.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  anchoice2.onPress = function () {
+    antwoScreen = 1;
+    anchoicetwo();
+  };
+
+  bchoice1 = new Clickable();
+  bchoice1.locate(width * 0.25, height * 0.25);
+  bchoice1.resize(400, 50);
+  bchoice1.text = "Choice 1";
+  bchoice1.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  bchoice1.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  bchoice1.onPress = function () {
+    boneScreen = 1;
+    bchoiceone();
+  };
+
+  bchoice2 = new Clickable();
+  bchoice2.locate(width * 0.25, height * 0.4);
+  bchoice2.resize(400, 50);
+  bchoice2.text = "Choice 2";
+  bchoice2.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  bchoice2.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  bchoice2.onPress = function () {
+    btwoScreen = 1;
+    bchoicetwo();
+  };
+
+  dpchoice1 = new Clickable();
+  dpchoice1.locate(width * 0.25, height * 0.25);
+  dpchoice1.resize(400, 50);
+  dpchoice1.text = "Choice 1";
+  dpchoice1.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  dpchoice1.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  dpchoice1.onPress = function () {
+    dponeScreen = 1;
+    dpchoiceone();
+  };
+
+  dpchoice2 = new Clickable();
+  dpchoice2.locate(width * 0.25, height * 0.4);
+  dpchoice2.resize(400, 50);
+  dpchoice2.text = "Choice 2";
+  dpchoice2.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  dpchoice2.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  dpchoice2.onPress = function () {
+    dptwoScreen = 1;
+    dpchoicetwo();
+  };
+
+  acchoice1 = new Clickable();
+  acchoice1.locate(width * 0.25, height * 0.25);
+  acchoice1.resize(400, 50);
+  acchoice1.text = "Choice 1";
+  acchoice1.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  acchoice1.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  acchoice1.onPress = function () {
+    aconeScreen = 1;
+    acchoiceone();
+  };
+
+  acchoice2 = new Clickable();
+  acchoice2.locate(width * 0.25, height * 0.4);
+  acchoice2.resize(400, 50);
+  acchoice2.text = "Choice 2";
+  acchoice2.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  acchoice2.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  acchoice2.onPress = function () {
+    actwoScreen = 1;
+    acchoicetwo();
   };
 }
 
@@ -398,11 +417,11 @@ function draw() {
     case "dps2":
       dpchoicetwo();
       break;
-    case "as1":
-      achoiceone();
+    case "acs1":
+      acchoiceone();
       break;
-    case "as2":
-      achoicetwo();
+    case "acs2":
+      acchoicetwo();
       break;
     case "artSta":
       artistStatement();
@@ -422,6 +441,7 @@ function keyPressed() {
     bargainScreen = 0;
     depressionScreen = 0;
     acceptanceScreen = 0;
+
     statementScreen = 0;
     infoScreen = 0;
 
@@ -433,10 +453,10 @@ function keyPressed() {
     btwoScreen = 0;
     dponeScreen = 0;
     dptwoScreen = 0;
-    aoneScreen = 0;
-    atwoScreen = 0;
+    aconeScreen = 0;
+    actwoScreen = 0;
     
-  } else if (key === "n" || key === "N") {
+  } else if (key === "i" || key === "I") {
     mode = "rules";
   }
 }
@@ -444,22 +464,22 @@ function keyPressed() {
 function titleScreen() {
   background(255, 229, 168);
   image(mask, 0, 0);
-  mask.resize(500, 500);
+  mask.resize(800, 800);
   strokeWeight(5);
   stroke(255);
   fill(0);
-  textSize(35);
+  textSize(50);
   textAlign(CENTER);
   textFont(mdr);
   text("How Are You          ?", width * 0.5, height * 0.33);
   fill(0);
-  line(310, 182, 440, 182);
+  line(480, 280, 680, 280);
   fill(141, 162, 184);
-  text("Feeling", width * 0.75, height * 0.33);
+  text("Feeling", width * 0.72, height * 0.33);
   fill(0);
   textSize(25);
-  text('Press "n" to read instructions', width * 0.5, height * 0.66);
-  text('OR press "s" to start', width * 0.5, height * 0.73);
+  text("Press S to start", width * 0.5, height * 0.79);
+  text("Press I to view Instructions", width * 0.5, height * 0.83);
 }
 
 //instructions page
@@ -471,7 +491,9 @@ function instructions() {
   textSize(35);
   textAlign(CENTER);
   textFont(mdr);
-  text("Instructions", width * 0.5, height * 0.33);
+  text("Instructions", width * 0.5, height * 0.1);
+  textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
 }
 
 //main game screen
@@ -484,17 +506,20 @@ function mainStage() {
   textAlign(CENTER);
   text("Click on any of the stages!", width * 0.5, height * 0.1);
   textSize(15);
-  text("But for those wondering the usual order:", width * 0.5, height * 0.135);
+  text("The order:", width * 0.5, height * 0.14);
   text(
     "Denial -> Anger -> Bargain -> Depression -> Acceptance",
     width * 0.5,
     height * 0.17
   );
+  text("Press I to view Instructions", width * 0.16, height * 0.03);
+  
   denial.draw();
   anger.draw();
   bargain.draw();
   depression.draw();
   acceptance.draw();
+  
   artStatement.draw();
   info.draw();
 }
@@ -510,15 +535,15 @@ function closeStage() {
   if (denialScreen == 1) {
     background(170, 163, 199);
     image(deny, 10, 0);
-    deny.resize(500, 500);
+    deny.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("No...this isn't happening. They're", 250, 400);
-    text("not gone!", 250, 430);
+    text("No...this isn't happening. They're", width * 0.5, height * 0.79);
+    text("not gone!", width * 0.5, height * 0.82);
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Denial", width * 0.22, height * 0.73);
 
@@ -546,15 +571,19 @@ function closeStage() {
   if (angerScreen == 1) {
     background(181, 140, 118);
     image(angry, -60, -100);
-    angry.resize(600, 600);
+    angry.resize(900, 900);
     textBox();
     textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("Why did you leave me?!", 250, 400);
-    text("Why'd you leave me here to suffer alone?!", 250, 430);
+    text("Why did you leave me?!", width * 0.5, height * 0.79);
+    text(
+      "Why'd you leave me here to suffer alone?!",
+      width * 0.5,
+      height * 0.82
+    );
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Anger", width * 0.22, height * 0.73);
 
@@ -582,14 +611,18 @@ function closeStage() {
   if (bargainScreen == 1) {
     background(158, 166, 146);
     image(bargaining, -50, 0);
-    bargaining.resize(600, 600);
+    bargaining.resize(900, 900);
     textBox();
     textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("...I'll do this, but I'm not doing anything more.", 250, 400);
+    text(
+      "...I'll do this, but I'm not doing anything more.",
+      width * 0.5,
+      height * 0.79
+    );
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Bargaining", width * 0.25, height * 0.73);
 
@@ -617,14 +650,14 @@ function closeStage() {
   if (depressionScreen == 1) {
     background(0, 0, 0);
     image(depress, -50, 0);
-    depress.resize(600, 600);
+    depress.resize(900, 900);
     textBox();
     textSize(30);
     fill(255);
     textAlign(CENTER);
-    text("...", 250, 400);
+    text("...", width * 0.5, height * 0.79);
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Depression", width * 0.25, height * 0.73);
 
@@ -652,32 +685,32 @@ function closeStage() {
   if (acceptanceScreen == 1) {
     background(255, 255, 255);
     image(accept, -50, 0);
-    accept.resize(600, 600);
+    accept.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("It's better to move on instead", 250, 400);
-    text("of staying in the past. It's what", 250, 425);
-    text("they would've wanted for me.", 250, 450);
+    text("It's better to move on instead", width * 0.5, height * 0.79);
+    text("of staying in the past. It's what", width * 0.5, height * 0.83);
+    text("they would've wanted for me.", width * 0.5, height * 0.87);
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Acceptance", width * 0.25, height * 0.73);
 
-    achoice1.draw();
-    achoice2.draw();
-    if (achoice1.onPress) {
-      mode = "as1";
+    acchoice1.draw();
+    acchoice2.draw();
+    // if (acchoice1.onPress) {
+    //   mode = "acs1";
+    // }
+    if (aconeScreen == 1) {
+      acchoiceone();
     }
-    if (aoneScreen == 1) {
-      achoiceone();
-    }
-    if (achoice2.onPress) {
-      mode = "as2";
-    }
-    if (atwoScreen == 1) {
-      achoicetwo();
+    // if (acchoice2.onPress) {
+    //   mode = "acs2";
+    // }
+    if (actwoScreen == 1) {
+      acchoicetwo();
     }
   }
 }
@@ -694,7 +727,9 @@ function artistStatement() {
     textSize(35);
     textAlign(CENTER);
     textFont(mdr);
-    text("Artist Statement", width * 0.5, height * 0.33);
+    text("Artist Statement", width * 0.5, height * 0.1);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
   }
 }
 
@@ -710,27 +745,24 @@ function ending() {
     textSize(35);
     textAlign(CENTER);
     textFont(mdr);
-    text("Info page", width * 0.5, height * 0.33);
+    text("Info page", width * 0.5, height * 0.1);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
   }
-}
-
-function textBox() {
-  fill(255, 255, 255, 150);
-  rect(50, 370, 400, 100, 20);
 }
 
 function dchoiceone() {
   if (doneScreen == 1) {
     background(170, 163, 199);
     image(deny, 10, 0);
-    deny.resize(500, 500);
+    deny.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("Choice one", 250, 400);
+    text("Choice one", width * 0.5, height * 0.79);
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Denial", width * 0.22, height * 0.73);
   }
@@ -740,135 +772,157 @@ function dchoicetwo() {
   if (dtwoScreen == 1) {
     background(170, 163, 199);
     image(deny, 10, 0);
-    deny.resize(500, 500);
+    deny.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("Choice two", 250, 400);
+    text("Choice two", width * 0.5, height * 0.79);
     textSize(15);
-    text("Press s to return", 250, 490);
+    text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
     text("Denial", width * 0.22, height * 0.73);
   }
 }
 
 function anchoiceone() {
-  background(181, 140, 118);
-  image(angry, -60, -100);
-  angry.resize(600, 600);
-  textBox();
-  textSize(15);
-  fill(0);
-  textAlign(CENTER);
-  text("Angry 1", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Anger", width * 0.22, height * 0.73);
+  if (anoneScreen == 1) {
+    background(181, 140, 118);
+    image(angry, -60, -100);
+    angry.resize(900, 900);
+    textBox();
+    textSize(15);
+    fill(0);
+    textAlign(CENTER);
+    text("Angry one", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Anger", width * 0.22, height * 0.73);
+  }
 }
 
 function anchoicetwo() {
-  background(181, 140, 118);
-  image(angry, -60, -100);
-  angry.resize(600, 600);
-  textBox();
-  textSize(15);
-  fill(0);
-  textAlign(CENTER);
-  text("Angry 2", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Anger", width * 0.22, height * 0.73);
+  if (antwoScreen == 1) {
+    background(181, 140, 118);
+    image(angry, -60, -100);
+    angry.resize(900, 900);
+    textBox();
+    textSize(15);
+    fill(0);
+    textAlign(CENTER);
+    text("Angry two", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Anger", width * 0.22, height * 0.73);
+  }
 }
 
 function bchoiceone() {
-  background(158, 166, 146);
-  image(bargaining, -50, 0);
-  bargaining.resize(600, 600);
-  textBox();
-  textSize(15);
-  fill(0);
-  textAlign(CENTER);
-  text("bargain 1", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Bargaining", width * 0.25, height * 0.73);
+  if (boneScreen == 1) {
+    background(158, 166, 146);
+    image(bargaining, -50, 0);
+    bargaining.resize(900, 900);
+    textBox();
+    textSize(15);
+    fill(0);
+    textAlign(CENTER);
+    text("bargain one", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Bargaining", width * 0.25, height * 0.73);
+  }
 }
 
 function bchoicetwo() {
-  background(158, 166, 146);
-  image(bargaining, -50, 0);
-  bargaining.resize(600, 600);
-  textBox();
-  textSize(15);
-  fill(0);
-  textAlign(CENTER);
-  text("bargain 2", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Bargaining", width * 0.25, height * 0.73);
+  if (btwoScreen == 1) {
+    background(158, 166, 146);
+    image(bargaining, -50, 0);
+    bargaining.resize(900, 900);
+    textBox();
+    textSize(15);
+    fill(0);
+    textAlign(CENTER);
+    text("bargain two", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Bargaining", width * 0.25, height * 0.73);
+  }
 }
 
 function dpchoiceone() {
-  background(0, 0, 0);
-  image(depress, -50, 0);
-  depress.resize(600, 600);
-  textBox();
-  textSize(30);
-  fill(255);
-  textAlign(CENTER);
-  text("depressed 1", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Depression", width * 0.25, height * 0.73);
+  if (dponeScreen == 1) {
+    background(0, 0, 0);
+    image(depress, -50, 0);
+    depress.resize(900, 900);
+    textBox();
+    textSize(30);
+    fill(255);
+    textAlign(CENTER);
+    text("depressed one", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Depression", width * 0.25, height * 0.73);
+  }
 }
 
 function dpchoicetwo() {
-  background(0, 0, 0);
-  image(depress, -50, 0);
-  depress.resize(600, 600);
-  textBox();
-  textSize(30);
-  fill(255);
-  textAlign(CENTER);
-  text("depressed 2", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Depression", width * 0.25, height * 0.73);
+  if (dptwoScreen == 1) {
+    background(0, 0, 0);
+    image(depress, -50, 0);
+    depress.resize(900, 900);
+    textBox();
+    textSize(30);
+    fill(255);
+    textAlign(CENTER);
+    text("depressed two", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Depression", width * 0.25, height * 0.73);
+  }
 }
 
-function achoiceone() {
-  background(255, 255, 255);
-  image(accept, -50, 0);
-  accept.resize(600, 600);
-  textBox();
-  textSize(20);
-  fill(0);
-  textAlign(CENTER);
-  text("accept 1", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Acceptance", width * 0.25, height * 0.73);
+function acchoiceone() {
+  if (aconeScreen == 1) {
+    background(255, 255, 255);
+    image(accept, -50, 0);
+    accept.resize(800, 800);
+    textBox();
+    textSize(20);
+    fill(0);
+    textAlign(CENTER);
+    text("accept one", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Acceptance", width * 0.25, height * 0.73);
+  }
 }
 
-function achoicetwo() {
-  background(255, 255, 255);
-  image(accept, -50, 0);
-  accept.resize(600, 600);
-  textBox();
-  textSize(20);
-  fill(0);
-  textAlign(CENTER);
-  text("accept 2", 250, 400);
-  textSize(15);
-  text("Press s to return", 250, 490);
-  textSize(20);
-  text("Acceptance", width * 0.25, height * 0.73);
+function acchoicetwo() {
+  if (actwoScreen == 1) {
+    background(255, 255, 255);
+    image(accept, -50, 0);
+    accept.resize(800, 800);
+    textBox();
+    textSize(20);
+    fill(0);
+    textAlign(CENTER);
+    text("accept two", width * 0.5, height * 0.79);
+    textSize(15);
+    text("Press s to return", width * 0.5, height * 0.99);
+    textSize(20);
+    text("Acceptance", width * 0.25, height * 0.73);
+  }
+}
+
+//make transparent textbox for dialogue
+function textBox() {
+  fill(255, 255, 255, 150);
+  rect(100, 600, 600, 175, 20);
 }

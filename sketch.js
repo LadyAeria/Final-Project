@@ -1,6 +1,28 @@
 let mode = "title";
+let myMasks = [];
+let facemask = [];
+let myRage = [];
+let button;
 
-//font
+//font/images
+var maskFigure;
+var scratch;
+var deny;
+var denyTwo;
+var angry;
+var angryTwo;
+var bargaining;
+var bargainingTwo;
+var depress;
+var accept;
+var acceptTwo;
+var happymask;
+var angrymask;
+var frownmask;
+var blankmask;
+var sadmask;
+var tickmark;
+
 let mdr;
 
 // characters/stages
@@ -50,13 +72,26 @@ var acchoice1;
 var acchoice2;
 
 function preload() {
-  mask = loadImage("mask.png");
-  deny = loadImage("denial.png");
-  angry = loadImage("anger.png");
-  bargaining = loadImage("bargain.png");
-  depress = loadImage("depression.png");
-  accept = loadImage("acceptance.png");
+  maskFigure = loadImage("masked figure.png");
+  scratch = loadImage("pngfind.com-emo-hair-png-9400.png");
+  deny = loadImage("denial character.png");
+  denyTwo = loadImage("denial character 2.png");
+  angry = loadImage("anger character.png");
+  angryTwo = loadImage("angry character 2.png");
+  bargaining = loadImage("bargain character.png");
+  bargainingTwo = loadImage("bargain character 2.png");
+  depress = loadImage("depression character.png");
+  accept = loadImage("acceptance character.png");
+  acceptTwo = loadImage("acceptance character 2.png")
+  
+  happymask = loadImage("mask happy.png");
+  angrymask = loadImage("mask angry.png");
+  blankmask = loadImage("mask blank.png");
+  sadmask = loadImage("mask sad.png");
+  frownmask = loadImage("mask frown.png");
+  tickmark = loadImage("anger-symbol_1f4a2.png");
 
+  facemasks = [happymask, angrymask, blankmask, sadmask, frownmask];
   mdr = loadFont("MeteoraDemoRegular-nMEV.ttf");
 }
 
@@ -68,8 +103,11 @@ function setup() {
 
   //Character One
   denial = new Clickable();
+  denial.image = happymask;
   denial.locate(width * 0.03, height * 0.4);
   denial.resize(140, 140);
+  denial.cornerRadius = 30;
+  denial.textColor = "#FFFFFF";
   denial.text = "D e n i a l";
   denial.onHover = function () {
     this.color = "#FFE475";
@@ -87,8 +125,11 @@ function setup() {
 
   //Character Two
   anger = new Clickable();
+  anger.image = angrymask;
   anger.locate(width * 0.22, height * 0.4);
   anger.resize(140, 140);
+  anger.cornerRadius = 30;
+  anger.textColor = "#FFFFFF";
   anger.text = "A n g e r";
   anger.onHover = function () {
     this.color = "#FFE475";
@@ -106,8 +147,11 @@ function setup() {
 
   //Character Three
   bargain = new Clickable();
+  bargain.image = frownmask;
   bargain.locate(width * 0.41, height * 0.4);
   bargain.resize(140, 140);
+  bargain.cornerRadius = 30;
+  bargain.textColor = "#FFFFFF";
   bargain.text = "B a r g a i n";
   bargain.onHover = function () {
     this.color = "#FFE475";
@@ -115,7 +159,7 @@ function setup() {
     this.tint = "#FF0000";
   };
   bargain.onOutside = function () {
-    this.color = "#98FAB9";
+    this.color = "#7CD89B";
     this.noTint = true;
   };
   bargain.onPress = function () {
@@ -125,8 +169,11 @@ function setup() {
 
   //Character Four
   depression = new Clickable();
+  depression.image = sadmask;
   depression.locate(width * 0.6, height * 0.4);
   depression.resize(140, 140);
+  depression.cornerRadius = 30;
+  depression.textColor = "#FFFFFF";
   depression.text = "D e p r e s s i o n";
   depression.onHover = function () {
     this.color = "#FFE475";
@@ -144,8 +191,11 @@ function setup() {
 
   //Character Five
   acceptance = new Clickable();
+  acceptance.image = happymask;
   acceptance.locate(width * 0.79, height * 0.4);
   acceptance.resize(140, 140);
+  acceptance.cornerRadius = 30;
+  acceptance.textColor = "#FFFFFF";
   acceptance.text = "A c c e p t a n c e";
   acceptance.onHover = function () {
     this.color = "#FFE475";
@@ -201,7 +251,7 @@ function setup() {
   dchoice1 = new Clickable();
   dchoice1.locate(width * 0.25, height * 0.25);
   dchoice1.resize(400, 50);
-  dchoice1.text = "Choice 1";
+  dchoice1.text = "Who's not gone?";
   dchoice1.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -219,7 +269,7 @@ function setup() {
   dchoice2 = new Clickable();
   dchoice2.locate(width * 0.25, height * 0.4);
   dchoice2.resize(400, 50);
-  dchoice2.text = "Choice 2";
+  dchoice2.text = "Hey, are you ok?";
   dchoice2.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -237,7 +287,7 @@ function setup() {
   anchoice1 = new Clickable();
   anchoice1.locate(width * 0.25, height * 0.25);
   anchoice1.resize(400, 50);
-  anchoice1.text = "Choice 1";
+  anchoice1.text = "Um...you ok du-";
   anchoice1.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -255,7 +305,7 @@ function setup() {
   anchoice2 = new Clickable();
   anchoice2.locate(width * 0.25, height * 0.4);
   anchoice2.resize(400, 50);
-  anchoice2.text = "Choice 2";
+  anchoice2.text = "(•_•)";
   anchoice2.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -273,7 +323,7 @@ function setup() {
   bchoice1 = new Clickable();
   bchoice1.locate(width * 0.25, height * 0.25);
   bchoice1.resize(400, 50);
-  bchoice1.text = "Choice 1";
+  bchoice1.text = "Would it have made a difference?";
   bchoice1.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -291,7 +341,7 @@ function setup() {
   bchoice2 = new Clickable();
   bchoice2.locate(width * 0.25, height * 0.4);
   bchoice2.resize(400, 50);
-  bchoice2.text = "Choice 2";
+  bchoice2.text = "Hey, hey, pull yourself together";
   bchoice2.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -309,7 +359,7 @@ function setup() {
   dpchoice1 = new Clickable();
   dpchoice1.locate(width * 0.25, height * 0.25);
   dpchoice1.resize(400, 50);
-  dpchoice1.text = "Choice 1";
+  dpchoice1.text = "You...all right?";
   dpchoice1.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -327,7 +377,7 @@ function setup() {
   dpchoice2 = new Clickable();
   dpchoice2.locate(width * 0.25, height * 0.4);
   dpchoice2.resize(400, 50);
-  dpchoice2.text = "Choice 2";
+  dpchoice2.text = "Are you ok?";
   dpchoice2.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -345,7 +395,7 @@ function setup() {
   acchoice1 = new Clickable();
   acchoice1.locate(width * 0.25, height * 0.25);
   acchoice1.resize(400, 50);
-  acchoice1.text = "Choice 1";
+  acchoice1.text = "So what now then?";
   acchoice1.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -363,7 +413,7 @@ function setup() {
   acchoice2 = new Clickable();
   acchoice2.locate(width * 0.25, height * 0.4);
   acchoice2.resize(400, 50);
-  acchoice2.text = "Choice 2";
+  acchoice2.text = "I'm glad you're feeling better.";
   acchoice2.onHover = function () {
     this.color = "#FFE475";
     this.noTint = false;
@@ -377,6 +427,51 @@ function setup() {
     actwoScreen = 1;
     acchoicetwo();
   };
+  
+  infoButton = new Clickable();
+  infoButton.locate(width * 0.44, height * 0.6);
+  infoButton.resize(100, 50);
+  infoButton.text = "Link";
+  infoButton.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  infoButton.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  infoButton.onPress = function () {
+    window.open('https://www.cruse.org.uk/understanding-grief/effects-of-grief/five-stages-of-grief/', '_blank');
+  };
+  
+  liveCode = new Clickable();
+  liveCode.locate(width * 0.44, height * 0.6);
+  liveCode.resize(100, 50);
+  liveCode.text = "Link";
+  liveCode.onHover = function () {
+    this.color = "#FFE475";
+    this.noTint = false;
+    this.tint = "#FF0000";
+  };
+  liveCode.onOutside = function () {
+    this.color = "#FFFFFF";
+    this.noTint = true;
+  };
+  liveCode.onPress = function () {
+    window.open('https://github.com/LadyAeria/Final-Project', '_blank');
+  };
+  
+    for (let i = 0; i < 20; i++) {
+    let x = random(width*0.05,width*0.925);
+    let y = random(height*0.05,height*0.925);
+    myMasks[i] = new mask(x,y);
+  }
+  for (let i = 0; i < 20; i++) {
+    let x = random(width*0.05,width*0.925);
+    let y = random(height*0.05,height*0.925);
+    myRage[i] = new rage(x,y);
+  }
 }
 
 function draw() {
@@ -462,20 +557,26 @@ function keyPressed() {
 }
 
 function titleScreen() {
-  background(255, 229, 168);
-  image(mask, 0, 0);
-  mask.resize(800, 800);
+  background(54, 55, 59);
+  
+  for (let i = 0;  i < 20; i++) {
+    myMasks[i].display();
+    myMasks[i].move();
+  }
+  
+  image(maskFigure, 20, 0);
+  maskFigure.resize(800, 800);
   strokeWeight(5);
   stroke(255);
   fill(0);
   textSize(50);
   textAlign(CENTER);
   textFont(mdr);
-  text("How Are You          ?", width * 0.5, height * 0.33);
-  fill(0);
-  line(480, 280, 680, 280);
+  text("How Are You          ?", width * 0.5, height * 0.1);
   fill(141, 162, 184);
-  text("Feeling", width * 0.72, height * 0.33);
+  text("Feeling", width * 0.72, height * 0.1);
+  image(scratch, 475, 20);
+  scratch.resize(200, 90);
   fill(0);
   textSize(25);
   text("Press S to start", width * 0.5, height * 0.79);
@@ -492,8 +593,14 @@ function instructions() {
   textAlign(CENTER);
   textFont(mdr);
   text("Instructions", width * 0.5, height * 0.1);
+  text("Press s to start", width * 0.5, height * 0.5);
   textSize(15);
-    text("Press s to return", width * 0.5, height * 0.99);
+  text("Life is unpredictable as it throws many curveballs such as accidents, fights, and", width * 0.5, height * 0.2);
+  text("passings of loved ones. There are five stages, each representing a certain stage of grief.", width * 0.5, height * 0.22);
+  text("Click any of them to interact with a character.", width * 0.5, height * 0.24)
+  text("Whatever order you choose won’t affect the game as the stages of grief are non-linear.", width * 0.5, height * 0.26);
+  text("and unpredictable.", width * 0.5, height * 0.28);
+  text("Press s to return", width * 0.5, height * 0.99);
 }
 
 //main game screen
@@ -617,7 +724,7 @@ function closeStage() {
     fill(0);
     textAlign(CENTER);
     text(
-      "...I'll do this, but I'm not doing anything more.",
+      "...What if I made it in time?",
       width * 0.5,
       height * 0.79
     );
@@ -684,7 +791,7 @@ function closeStage() {
   // acceptanceScreen = 1;
   if (acceptanceScreen == 1) {
     background(255, 255, 255);
-    image(accept, -50, 0);
+    image(accept, 0, 0);
     accept.resize(800, 800);
     textBox();
     textSize(20);
@@ -700,15 +807,9 @@ function closeStage() {
 
     acchoice1.draw();
     acchoice2.draw();
-    // if (acchoice1.onPress) {
-    //   mode = "acs1";
-    // }
     if (aconeScreen == 1) {
       acchoiceone();
     }
-    // if (acchoice2.onPress) {
-    //   mode = "acs2";
-    // }
     if (actwoScreen == 1) {
       acchoicetwo();
     }
@@ -721,6 +822,7 @@ function artistStatement() {
   }
   if (statementScreen == 1) {
     background(255, 229, 168);
+    liveCode.draw();
     strokeWeight(5);
     stroke(255);
     fill(0);
@@ -729,6 +831,12 @@ function artistStatement() {
     textFont(mdr);
     text("Artist Statement", width * 0.5, height * 0.1);
     textSize(15);
+    text("The concept of death always fascinated me especially when it comes to theories of", width * 0.5, height * 0.3);
+    text("what happens after. but I decided to look into the stages of grief people affected by the passings", width * 0.5, height * 0.32);
+    text("of close people for more understanding of what these people go through. I created this very", width * 0.5, height * 0.34);
+    text("short visual novel interaction for users to explore and interact with characters going through", width * 0.5, height * 0.36);
+    text("a certain stage of grief and choose from different dialogue options.", width * 0.5, height * 0.38);
+    text("Click below to go to the live code!", width * 0.5, height * 0.5);
     text("Press s to return", width * 0.5, height * 0.99);
   }
 }
@@ -739,6 +847,7 @@ function ending() {
   }
   if (infoScreen == 1) {
     background(255, 229, 168);
+    infoButton.draw();
     strokeWeight(5);
     stroke(255);
     fill(0);
@@ -746,6 +855,12 @@ function ending() {
     textAlign(CENTER);
     textFont(mdr);
     text("Info page", width * 0.5, height * 0.1);
+    textSize(20);
+    text("Dealing with grief is not always linear.", width * 0.5, height * 0.3);
+    text("It can start at any stage at any time, some going through one stage", width *0.5, height*0.35);
+    text("while others go through another said stage.", width *0.5, height*0.4);
+    text("Click the link below for more information about the stages of grief.", width *0.5, height*0.45);
+    text("(If clicking doesn't work, right click and 'open link to new tab')", width *0.5, height*0.5);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
   }
@@ -754,13 +869,13 @@ function ending() {
 function dchoiceone() {
   if (doneScreen == 1) {
     background(170, 163, 199);
-    image(deny, 10, 0);
-    deny.resize(800, 800);
+    image(denyTwo, 10, 0);
+    denyTwo.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("Choice one", width * 0.5, height * 0.79);
+    text("This is just a dream! A dream...", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -771,13 +886,13 @@ function dchoiceone() {
 function dchoicetwo() {
   if (dtwoScreen == 1) {
     background(170, 163, 199);
-    image(deny, 10, 0);
-    deny.resize(800, 800);
+    image(denyTwo, 10, 0);
+    denyTwo.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("Choice two", width * 0.5, height * 0.79);
+    text("Yes...no...? I don't know!", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -788,13 +903,17 @@ function dchoicetwo() {
 function anchoiceone() {
   if (anoneScreen == 1) {
     background(181, 140, 118);
-    image(angry, -60, -100);
-    angry.resize(900, 900);
+    for (let i = 0;  i < 20; i++) {
+    myRage[i].display();
+    myRage[i].move();
+  }
+    image(angryTwo, -60, -100);
+    angryTwo.resize(900, 900);
     textBox();
-    textSize(15);
+    textSize(30);
     fill(0);
     textAlign(CENTER);
-    text("Angry one", width * 0.5, height * 0.79);
+    text("GET THE F*** OUT!!! OUT!!!!!", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -811,7 +930,7 @@ function anchoicetwo() {
     textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("Angry two", width * 0.5, height * 0.79);
+    text("(Maybe it's best to leave this one...)", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -822,13 +941,13 @@ function anchoicetwo() {
 function bchoiceone() {
   if (boneScreen == 1) {
     background(158, 166, 146);
-    image(bargaining, -50, 0);
-    bargaining.resize(900, 900);
+    image(bargainingTwo, -50, 0);
+    bargainingTwo.resize(900, 900);
     textBox();
     textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("bargain one", width * 0.5, height * 0.79);
+    text("I...I don't know...", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -839,13 +958,13 @@ function bchoiceone() {
 function bchoicetwo() {
   if (btwoScreen == 1) {
     background(158, 166, 146);
-    image(bargaining, -50, 0);
-    bargaining.resize(900, 900);
+    image(bargainingTwo, -50, 0);
+    bargainingTwo.resize(900, 900);
     textBox();
     textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("bargain two", width * 0.5, height * 0.79);
+    text("B-But they could've lived! If only I could go back...", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -862,7 +981,7 @@ function dpchoiceone() {
     textSize(30);
     fill(255);
     textAlign(CENTER);
-    text("depressed one", width * 0.5, height * 0.79);
+    text("...........", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -879,7 +998,8 @@ function dpchoicetwo() {
     textSize(30);
     fill(255);
     textAlign(CENTER);
-    text("depressed two", width * 0.5, height * 0.79);
+    textSize(20);
+    text("...Just leave me alone...", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -890,13 +1010,13 @@ function dpchoicetwo() {
 function acchoiceone() {
   if (aconeScreen == 1) {
     background(255, 255, 255);
-    image(accept, -50, 0);
-    accept.resize(800, 800);
+    image(acceptTwo, 0, 0);
+    acceptTwo.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("accept one", width * 0.5, height * 0.79);
+    text("Who knows. Maybe a little walk in the park to freshen up.", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -907,13 +1027,13 @@ function acchoiceone() {
 function acchoicetwo() {
   if (actwoScreen == 1) {
     background(255, 255, 255);
-    image(accept, -50, 0);
-    accept.resize(800, 800);
+    image(acceptTwo, 0, 0);
+    acceptTwo.resize(800, 800);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("accept two", width * 0.5, height * 0.79);
+    text("So am I.", width * 0.5, height * 0.79);
     textSize(15);
     text("Press s to return", width * 0.5, height * 0.99);
     textSize(20);
@@ -925,4 +1045,68 @@ function acchoicetwo() {
 function textBox() {
   fill(255, 255, 255, 150);
   rect(100, 600, 600, 175, 20);
+}
+
+function gotolink() {
+	window.open('https://www.cruse.org.uk/understanding-grief/effects-of-grief/five-stages-of-grief/');
+}
+
+class mask {
+  constructor (xpos, ypos) {
+    this.xpos = xpos;
+    this.ypos = ypos;
+    this.t = int(0);
+    this.s = random(0,0);
+  }
+  display() {
+    push();
+    translate(this.xpos, this.ypos);
+    rotate(this.t);
+    let diffMasks = random(facemasks);
+    diffMasks.resize(200,200);
+    image(diffMasks, 0, 0);
+    pop();
+
+  }
+  move() {
+    this.t = this.t + this.s;
+    this.mask++;
+    if (this.ypos <= height *1.3)
+      {
+        this.ypos+= 2;
+      }
+    else
+      {
+        this.ypos = -height * 0.3;
+      }
+  }
+}
+
+class rage {
+  constructor(xpos, ypos){
+    this.xpos = xpos;
+    this.ypos = ypos;
+    this.t = int(random(360));
+    this.s = random(-100,100);
+  }
+  display() {
+    push();
+    translate(this.xpos, this.ypos);
+    rotate(this.t);
+    image(tickmark, 0,0);
+    pop();
+
+  }
+  move() {
+    this.t = this.t + this.s;
+    this.rage++;
+    if (this.ypos <= height *1.3)
+      {
+        this.ypos+= 2;
+      }
+    else
+      {
+        this.ypos = -height * 0.3;
+      }
+  }
 }
